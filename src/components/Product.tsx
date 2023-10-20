@@ -2,6 +2,7 @@ import React, { FC, useState } from "react";
 import { ProductType } from "@/interfaces";
 import { useAppDispatch } from "@/redux/hooks";
 import { addToCart } from "@/redux/CartReducer";
+import { toast } from "react-toastify";
 interface ProductPageType {
   item: ProductType;
 }
@@ -13,6 +14,7 @@ const Product: FC<ProductPageType> = ({ item }) => {
   const addItemToCart = (item: ProductType) => {
     dispatch(addToCart(item));
     setAdded(true);
+    toast.success('Product sucessfully added to cart');
     setTimeout(() => {
       setAdded(false);
     }, 2000);

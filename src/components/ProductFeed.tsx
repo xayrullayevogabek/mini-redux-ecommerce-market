@@ -22,7 +22,7 @@ const ProductFeed = () => {
   }, []);
 
   return (
-    <div className="mt-20 mx-8">
+    <div className="mt-20 mx-8 mb-36">
       <h1 className="ml-4 font-bold text-2xl">Related Products</h1>
       <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-5">
         {product?.map((item) => (

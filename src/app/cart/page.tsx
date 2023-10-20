@@ -8,10 +8,17 @@ import {
   removeFromCart,
 } from "@/redux/CartReducer";
 import { ProductType } from "@/interfaces";
+import { toast } from "react-toastify";
+import { loadStripe } from "@stripe/stripe-js";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 const Cart = () => {
   const cart = useAppSelector((state) => state.cart.cart);
+  const router = useRouter();
+  const stripePromise = loadStripe(
+    "pk_test_51O3HGmAXTgBzwtX0Ag0IQjtlDmvcskTH0jRjcGbt6r2xjwvPMG92tuQhjt7gJBHmCE6UiBVfBZFeKnw4c6bisipG00oqJXVBv9"
+  );
   console.log("cart", cart);
   const total = cart
     ?.map((item) => item.quantity * item.price)
@@ -30,6 +37,12 @@ const Cart = () => {
 
   const removeItem = (item: ProductType) => {
     dispatch(removeFromCart(item));
+    toast.success("Product successfully deleted");
+  };
+
+  const handlePay = () => {
+    router.replace("/success");
+    toast.success(" Successfully Payment ");
   };
 
   return (
@@ -111,7 +124,10 @@ const Cart = () => {
                   </p>
                 </div>
               </div>
-              <button className="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">
+              <button
+                onClick={handlePay}
+                className="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600"
+              >
                 Check out
               </button>
             </div>
@@ -126,7 +142,7 @@ const Cart = () => {
             alt=""
             className="h-96 w-96 mt-24"
           />
-          <Link href={'/'}>
+          <Link href={"/"}>
             <button className=" bg-blue-500 text-white p-4 mt-5 rounded-lg hover:text-black hover:bg-transparent border hover:border-blue-500 transition duration-500">
               Back to Buy
             </button>

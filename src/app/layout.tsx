@@ -2,8 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import ReduxProvider from "./ReduxProvider";
+import ToastNotification from "@/components/ToastNotification";
 
 const montserrat = Montserrat({ subsets: ["latin"], display: "swap" });
 
@@ -23,7 +23,7 @@ export default function RootLayout({
         <ReduxProvider>
           <Header />
           {children}
-          {/* <Footer /> */}
+          <ToastNotification/>
         </ReduxProvider>
       </body>
     </html>
